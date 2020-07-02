@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login','API\UserController@login');
 Route::post('loginodontologo','API\UserController@loginOdontologo');
+//
+Route::post('odontologostore','API\OdontologoController@store');

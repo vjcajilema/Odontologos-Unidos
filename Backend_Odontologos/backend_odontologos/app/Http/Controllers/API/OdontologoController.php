@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Odontologo;
 
 class OdontologoController extends Controller
@@ -42,30 +44,30 @@ class OdontologoController extends Controller
         $odontologo->apellidos=$apellidos;
         $url      = "/ImagenesUsuarios/";
         if(!$photo){
-            $fileName ='avatar.jpg';
+            $fileName ='avatar.png';
 
         }
         $storagePath =  $url . $fileName;
         $odontologo->path=$storagePath;
-
-        
+        $odontologo->estado=0;        
         $valor=false;
         $code = 500;
-        $validar=Usuarioapp::where('cedula',$cedula)->first();
+        $validar=Odontologo::where('cedula',$cedula)->first();
         if($validar){
             $mensaje= 'cedula en uso';
         }else{
             $odontologo->cedula=$cedula;
-            $validar=Usuarioapp::where('usuario',$usuario)->first();
+            $validar=Odontologo::where('usuario',$usuario)->first();
             if($validar){
                 $mensaje= 'usuario en uso';
             }else{
                 $odontologo->usuario=$usuario;
-                $validar=Usuarioapp::where('email',$email)->first();
+                $validar=Odontologo::where('email',$email)->first();
                 if($validar){
                     $mensaje= 'email en uso';
                 }else{
                     $odontologo->email=$email;
+                    $odontologo->password=Hash::make($password);
                     $odontologo->save();
                     if($odontologo->id){
                         $mensaje= 'usuario agregado exitosamente';

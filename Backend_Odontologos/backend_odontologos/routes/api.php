@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //
-Route::post('odontologostore','OdontologoController@store');
+Route::post('odontologostore','API\OdontologoController@store');

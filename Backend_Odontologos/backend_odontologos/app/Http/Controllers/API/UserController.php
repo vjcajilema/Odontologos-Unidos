@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\User;
@@ -38,6 +38,35 @@ class UserController extends Controller
         }else{
             return response()->json(['mensaje'=>'Error al inicio','valor'=>false,'code'=>500]);
         }*/
+    }
+
+
+    public function loginOdontologo(Request $request)
+    {
+        //dd('Credenciales '.$request->email.' '.$request->password);
+        $credenciales=$request->only('email','password');
+/*
+        if(Auth::guard('api')->attempt($request->only('email','password'),$request->filled('remember'))){
+            //Authentication passed...
+            return redirect()
+                ->intended(route('admin.home'))
+                ->with('status','You are Logged in as Admin!');
+        }*/
+        if(Auth::guard('api')->attempt(['usuario'=> request('email'),'password'=> request('password')])){
+            
+
+            $mensaje= 'Usuario Logeado';
+            $valor=true;
+            $code = 200;
+        }else{
+
+            $mensaje= 'Error al iniciar sesion';
+            $valor=false;
+            $code = 500;
+            
+        }
+        return response()->json(['mensaje'=>$mensaje,'valor'=>$valor,'code'=>$code]);
+
     }
 
 

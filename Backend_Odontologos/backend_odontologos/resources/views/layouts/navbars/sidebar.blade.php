@@ -99,13 +99,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" >
+                    <a class="nav-link" href="{{ route('odontologo.index')}}" >
                         <i class="ni ni-circle-08 text-blue"></i> {{ __('Odontologos') }}
                     </a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" >
-                        <i class="ni ni-pin-3 text-orange"></i> {{ __('Clinicas') }}
+                        <i class="ni ni-pin-3 text-orange" ></i> {{ __('Clinicas') }}
                     </a>
                 </li>
                 <li class="nav-item">

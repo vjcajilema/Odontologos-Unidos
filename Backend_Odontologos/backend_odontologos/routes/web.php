@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Odontologos
+Route::get('odontologos','ADMIN\OdontologoController@index')->name('odontologo.index');
+
+
+

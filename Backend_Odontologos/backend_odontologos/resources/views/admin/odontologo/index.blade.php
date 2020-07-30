@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => __('Listado Odontologos')])
 
 @section('content')
     @include('layouts.headers.cards')
@@ -37,8 +37,8 @@
                     <td> {{$od->email}}</td>
                     <td> {{$od->estado}}</td>
                     <td>
-                        <a >
-                          <i class="fas fa-eye"></i>
+                        <a href="{{ route('odontologos.show', $od['id']) }}">
+                          <i  class="fas fa-eye"></i>
                           Ver
                         </a>
 
@@ -49,7 +49,7 @@
                     </tr>
                   @empty
                     <tr>
-                      <td colspan="7">No hay sliders registrados</td>
+                      <td colspan="7">No hay odontologos registrados</td>
                     </tr>
                   @endforelse					  
 

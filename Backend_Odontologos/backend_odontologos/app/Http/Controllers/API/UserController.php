@@ -7,6 +7,7 @@ use App\User;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Odontologo;
 
 class UserController extends Controller
 {
@@ -52,19 +53,29 @@ class UserController extends Controller
                 ->intended(route('admin.home'))
                 ->with('status','You are Logged in as Admin!');
         }*/
-        if(Auth::guard('api')->attempt(['usuario'=> request('email'),'password'=> request('password')])){
+        $odontologo= Odontologo::where('usuario',request('email'))->first();
+//        dd($odontologo);
+        if($odontologo && $odontologo->estado==1){
+            if(Auth::guard('api')->attempt(['usuario'=> request('email'),'password'=> request('password')])){
             
 
-            $mensaje= 'Usuario Logeado';
-            $valor=true;
-            $code = 200;
+                $mensaje= 'Usuario Logeado';
+                $valor=true;
+                $code = 200;
+            }else{
+    
+                $mensaje= 'Error al iniciar sesion';
+                $valor=false;
+                $code = 500;
+                
+            }
         }else{
-
-            $mensaje= 'Error al iniciar sesion';
+            $mensaje= 'Odontologo no encontrado';
             $valor=false;
             $code = 500;
-            
         }
+
+
         return response()->json(['mensaje'=>$mensaje,'valor'=>$valor,'code'=>$code]);
 
     }

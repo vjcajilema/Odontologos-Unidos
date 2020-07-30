@@ -17,11 +17,11 @@ class CrearTablaForos extends Migration
             
             $table->bigIncrements('id');
             $table->string('titulo');
-            $table->string('descripción');
+            $table->string('descripcion');
             $table->boolean('estado');
-            $table->string('path');
             $table->unsignedBigInteger('creadopor')->nullable();
             $table->foreign('creadopor')->references('id')->on('odontologos');
+            $table->timestamps();
 
         });
     }

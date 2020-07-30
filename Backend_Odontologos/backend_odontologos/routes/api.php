@@ -22,3 +22,5 @@ Route::post('login','API\UserController@login');
 Route::post('loginodontologo','API\UserController@loginOdontologo');
 //
 Route::post('odontologostore','API\OdontologoController@store');
+
+Route::post('forostore','API\ForoController@store');

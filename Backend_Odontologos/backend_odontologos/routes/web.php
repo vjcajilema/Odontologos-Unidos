@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Odontologos
 Route::get('odontologos','ADMIN\OdontologoController@index')->name('odontologo.index');
+Route::get('odontologo/{id}', 'Admin\OdontologoController@show')->name('odontologos.show');
 
 
 

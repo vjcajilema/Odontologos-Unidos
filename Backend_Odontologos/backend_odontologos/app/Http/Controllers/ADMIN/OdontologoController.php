@@ -39,7 +39,18 @@ class OdontologoController extends Controller
 
     public function show($id)
     {
-        //
+        $odontologo=Odontologo::findOrFail($id);
+        //dd($odontologo->id);
+        return view( 'admin/odontologo/edit',['odontologo'=>$odontologo]);
+    }
+
+
+    public function habilitar($id)
+    {
+        $odontologo=Odontologo::findOrFail($id);
+        $odontologo->estado=1;
+        $odontologo->update();
+        return view( 'admin/odontologo/edit',['odontologo'=>$odontologo]);
     }
 
     /**

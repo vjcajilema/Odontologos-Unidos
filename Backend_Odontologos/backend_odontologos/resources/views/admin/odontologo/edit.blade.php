@@ -15,12 +15,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                        <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Habilitar') }}</a>
 
-                        </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    @if ($odontologo->estado==0)
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('odontologos.habilitar',$odontologo->id)}}" class="btn btn-info">{{ __('Habilitar') }}</a>
+                        </div>                        
+                    @else
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ route('odontologos.deshabilitar',$odontologo->id)}}" class="btn btn-danger">{{ __('Deshabilitar') }}</a>
+                        </div>                        
+
+                    @endif
+
                     </div>
+
                     <div class="card-body pt-0 pt-md-4">
                         <div class="row">
                         <div class="col">
@@ -111,9 +120,6 @@
 
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
-                                </div>
                             </div>
                         </form>
                         <hr class="my-4" />

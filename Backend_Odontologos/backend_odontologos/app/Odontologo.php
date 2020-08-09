@@ -21,5 +21,9 @@ class Odontologo extends Model
 		'actualizadopor',
     ];
 
+	public function especialidades()
+    {
+        return $this->hasMany('App\Odontologo-Especialidad');
+    }
 
 }

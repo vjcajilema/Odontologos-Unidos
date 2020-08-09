@@ -24,6 +24,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Odontologos
 Route::get('odontologos','ADMIN\OdontologoController@index')->name('odontologo.index');
 Route::get('odontologo/{id}', 'Admin\OdontologoController@show')->name('odontologos.show');
-
-
+Route::get('habodontologo/{id}', 'Admin\OdontologoController@habilitar')->name('odontologos.habilitar');
+Route::get('desodontologo/{id}', 'Admin\OdontologoController@deshabilitar')->name('odontologos.deshabilitar');
+//Especialidades
+Route::get('especialidades','ADMIN\EspecialidadController@index')->name('especialidad.index');
+Route::get('especialidad/{id}', 'Admin\EspecialidadController@edit')->name('especialidad.edit');
+Route::post('especialidadstore', 'Admin\EspecialidadController@store')->name('especialidad.store');
+Route::patch('especialidadupdate/{id}', 'Admin\EspecialidadController@update')->name('especialidad.update');
 

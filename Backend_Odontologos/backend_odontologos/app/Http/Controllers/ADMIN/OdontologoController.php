@@ -25,11 +25,6 @@ class OdontologoController extends Controller
     }
 
 
-    public function desactivar(Request $request, $id)
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -49,6 +44,14 @@ class OdontologoController extends Controller
     {
         $odontologo=Odontologo::findOrFail($id);
         $odontologo->estado=1;
+        $odontologo->update();
+        return view( 'admin/odontologo/edit',['odontologo'=>$odontologo]);
+    }
+
+    public function deshabilitar($id)
+    {
+        $odontologo=Odontologo::findOrFail($id);
+        $odontologo->estado=0;
         $odontologo->update();
         return view( 'admin/odontologo/edit',['odontologo'=>$odontologo]);
     }

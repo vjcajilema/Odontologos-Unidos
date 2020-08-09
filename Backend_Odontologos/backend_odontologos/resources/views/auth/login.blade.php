@@ -3,13 +3,11 @@
 @section('content')
     @include('layouts.headers.guest')
 
-    <div class="container mt--8 pb-5">
+    <div class="container mt--9 pb-5">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
 
-                    </div>
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
                             <small>

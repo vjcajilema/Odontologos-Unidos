@@ -8,8 +8,16 @@
         <div class=" col ">
           <div class="card">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">Odontologos</h3>
+              <h3 class="mb-0">Especialidades</h3>
             </div>
+            <div class="mailbox-controls with-border"> 
+                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#add_especialidad">
+
+                  <i class="fas fa-plus"></i> Nueva Especialidad
+                </a>
+                @include('admin.especialidad.Modal.add_especialidad')
+            </div>
+
             <div class="card-body">
               <div class="row icon-examples">
                   
@@ -19,37 +27,38 @@
 			            <tr>
 			              <th>#</th>
 			              <th>nombres</th>
-						  <th>apellidos</th>
-                          <th>cédula</th>
-                          <th>correo</th>
+						  <th>descripción</th>
                           <th>estado</th>
 
 			            </tr>
 			          </thead>
 					 
 			    		  <tbody>
-                  @forelse($odontologos as $key => $od)
+                  @forelse($especialidades as $key => $ep)
                     <tr>
                     <td>{{ $loop->index+1 }}</td>
-                    <td>{{ $od->nombres }}</td>
-                      <td>{{ $od->apellidos }}</td>
-                    <td> {{$od->cedula}}</td>
-                    <td> {{$od->email}}</td>
-                    @if ($od->estado==0)
-                      <td>Inactivo</td>
-                    @else 
-                      <td>activo</td>
+                    <td>{{ $ep->nombre }}</td>
+                    <td> {{$ep->descripcion}}</td>
+                    @if($ep->estado==0)
+                      <td> Inactivo</td>
+                    @else
+                      <td> Inactivo</td>
                     @endif
+                    
                     <td>
-                        <a href="{{ route('odontologos.show', $od['id']) }}">
+                        <a href="{{ route('especialidad.edit', $ep['id']) }}">
                           <i  class="fas fa-eye"></i>
                           Ver
                         </a>
-                    </td>
+
+                      </td>
+
+
+
                     </tr>
                   @empty
                     <tr>
-                      <td colspan="7">No hay odontologos registrados</td>
+                      <td colspan="7">No hay especialidades registrados</td>
                     </tr>
                   @endforelse					  
 

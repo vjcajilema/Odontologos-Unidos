@@ -24,3 +24,6 @@ Route::post('loginodontologo','API\UserController@loginOdontologo');
 Route::post('odontologostore','API\OdontologoController@store');
 
 Route::post('forostore','API\ForoController@store');
+
+//Especialidades
+Route::get('/especialidades','API\EspecialidadController@getAll');

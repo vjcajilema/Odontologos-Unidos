@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Odontologo;
-
+//use App\OdontologoEspecialidad;
 class OdontologoController extends Controller
 {
     /**
@@ -85,6 +85,31 @@ class OdontologoController extends Controller
 
         return response()->json(['mensaje'=>$mensaje,'valor'=>$valor,'code'=>$code]);
            
+    }
+
+
+    public function getbyEspecialidad($id){
+        
+        $intusuario=UsuarioInteres::where('id_usuario', '=', $id)->orderBy('id', 'asc')->get();
+        
+        $Data=[];
+        if(count($intusuario)===0){
+            
+            $Data[]=['interes'=>'Intereses no disponibles para el usuario'];
+            return ($Data);
+        }else{
+            
+            foreach($intusuario as $key=>$iu ){
+                $interes=Interes::find($iu->id_interes);
+                if($interes){
+                    $Data[]=[
+                        'interes'=>$interes->nombre,
+                    ];
+
+                }
+            }            
+            return ($Data);
+        }
     }
 
     /**

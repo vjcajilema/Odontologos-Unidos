@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Odontologo;
-//use App\OdontologoEspecialidad;
+use App\OdontologoEspecialidad;
+use App\Especialidad;
 class OdontologoController extends Controller
 {
     /**
@@ -89,26 +90,26 @@ class OdontologoController extends Controller
 
 
     public function getbyEspecialidad($id){
-        
-        $intusuario=UsuarioInteres::where('id_usuario', '=', $id)->orderBy('id', 'asc')->get();
-        
+        $especialidad=Especialidad::where('nombre',"=",$id)->first();
+        $odontoesp=OdontologoEspecialidad::where('especialidad', '=', $especialidad->id)->orderBy('id', 'asc')->get();
         $Data=[];
-        if(count($intusuario)===0){
-            
-            $Data[]=['interes'=>'Intereses no disponibles para el usuario'];
-            return ($Data);
-        }else{
-            
-            foreach($intusuario as $key=>$iu ){
-                $interes=Interes::find($iu->id_interes);
-                if($interes){
-                    $Data[]=[
-                        'interes'=>$interes->nombre,
-                    ];
+        if(count($odontoesp)===0){
+            return response()->json(['mensaje'=>'Error al buscar odontologos en especialidad','valor'=>null,'code'=>404]);            
 
-                }
-            }            
-            return ($Data);
+        }else{
+
+            $arrOdontologos = [];
+            foreach ($odontoesp as $odonto) {
+                $odontologo=Odontologo::find($odonto->odontologo);
+                $arrOdontologos[] = [
+                    'id' => $odontologo->id,
+                    'nombre' => $odontologo->nombres,
+                    'apellido' => $odontologo->apellidos,
+                    'path'=> $odontologo->path,
+                ];
+            }
+            return response()->json(['mensaje'=>'Odontologos encontrados','valor'=>$arrOdontologos,'code'=>202]);
+
         }
     }
 

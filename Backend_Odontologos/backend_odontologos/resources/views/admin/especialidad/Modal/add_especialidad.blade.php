@@ -15,9 +15,8 @@
                         {{ Form::text('name', null, ['required', 'class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                        {{ Form::label('description', 'Descripción *') }}
-                        {{ Form::text('description', null, ['required', 'class' => 'form-control']) }}
-                        </div>
+                        <label class="form-control-label" for="description">{{ __('Descripción') }}</label>
+						            <textarea type="text" id="description" name="description" placeholder="Descripción" class="form-control"  required></textarea>                        </div>
 
                     </div>
 

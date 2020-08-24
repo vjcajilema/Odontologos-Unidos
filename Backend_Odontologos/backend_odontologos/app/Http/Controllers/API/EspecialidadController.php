@@ -25,8 +25,8 @@ class EspecialidadController extends Controller
                 $arrEspecialidades = [];
                 foreach ($especialidades as $especialidad) {
                     $arrEspecialidad = [
-                        'id' => $especialidad->id,
-                        'nombre' => $especialidad->nombre,
+                        'value' => $especialidad->id,
+                        'label' => $especialidad->nombre,
                     ];
 
                     array_push($arrEspecialidades, $arrEspecialidad);

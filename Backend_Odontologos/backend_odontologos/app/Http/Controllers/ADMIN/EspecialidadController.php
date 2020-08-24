@@ -14,33 +14,39 @@ class EspecialidadController extends Controller
 {
     public function index()
     {
-        $especialidades = Especialidad::orderBy('id', 'asc')->get();
 
-        return view( 'admin/especialidad/index',['especialidades'=>$especialidades]);
+
+        return view( 'admin/especialidad/index',['especialidades'=>Especialidad::orderBy('id', 'asc')->get()]);
         
     }
 
     public function store(Request $request)
     {
-        
-        $validator = Validator::make($request->all(), [
-        
-            'name' 	=> 'required|string',
-            'description' => 'string',
+        try{
 
-        ]);
-        if ($validator->fails()) {
-            return back();
-        }else{
-            $especialidad = new Especialidad();
-            $especialidad->nombre=$request['name'];
-            $especialidad->descripcion=$request['description'];
-            $especialidad->estado=1;
-            $especialidad->creadopor=auth()->user()->id;
-            $especialidad->save();
+            $validator = Validator::make($request->all(), [
+        
+                'name' 	=> 'required|string',
+                'description' => 'string',
+    
+            ]);
+            if ($validator->fails()) {
+                return back();
+            }else{
+                $especialidad = new Especialidad();
+                $especialidad->nombre=$request['name'];
+                $especialidad->descripcion=$request['description'];
+                $especialidad->estado=1;
+                $especialidad->creadopor=auth()->user()->id;
+                $especialidad->save();
+            }
+    
+            return view( 'admin/especialidad/index',['especialidades'=>Especialidad::orderBy('id', 'asc')->get()]);            
+
+        }catch(Exception $e){
+            return view( 'admin/especialidad/index',['especialidades'=>Especialidad::orderBy('id', 'asc')->get()]);            
         }
 
-        return view( 'admin/especialidad/index',['especialidades'=>Especialidad::orderBy('id', 'asc')->get()]);
     }
 
 
@@ -71,7 +77,7 @@ class EspecialidadController extends Controller
             $especialidad->update();
         }
 
-        return view( 'admin/especialidad/index',['especialidades'=>Especialidad::orderBy('id', 'asc')->get()]);
+        return view( 'admin/especialidad/edit',['especialidad'=>$especialidad])->with('status', 'Tip modificado...');
     }
 
 }

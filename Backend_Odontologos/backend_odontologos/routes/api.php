@@ -20,10 +20,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login','API\UserController@login');
 Route::post('loginodontologo','API\UserController@loginOdontologo');
-//
+//Odontologo
 Route::post('odontologostore','API\OdontologoController@store');
+Route::get('/odontologobyespecialidad/{id}', 'API\OdontologoController@getbyEspecialidad');    
+
 
 Route::post('forostore','API\ForoController@store');
 
 //Especialidades
 Route::get('/especialidades','API\EspecialidadController@getAll');
+
+//CLinicas
+Route::post('clinicastore','API\ClinicaController@store');

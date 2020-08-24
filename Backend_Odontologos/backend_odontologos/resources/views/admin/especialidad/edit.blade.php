@@ -1,5 +1,16 @@
 @extends('layouts.app', ['title' => __('Editar especialidad')])
 
+    @section('scripts')
+		<script type="text/javascript">
+			
+			$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+			    $("#success-alert").slideUp(500);
+			});
+
+		</script>
+	@endsection
+
+
 @section('content')
 
     <div class="container-fluid mt--7">
@@ -39,6 +50,14 @@
                         </div>
                     </div>
                     <div class="card-body">
+                    <div class="col-md-12 mb-12" id="success-alert">
+		          		@if (session('status'))
+						    <div class="alert alert-success alert-dismissible">
+						    	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						        {{ session('status') }}
+						    </div>
+						@endif
+					</div>
 					{!!Form::model($especialidad,['method'=>'PATCH', 'files'=>true, 'route'=>['especialidad.update',$especialidad->id]])!!}
 					{{Form::token()}}
                             <h6 class="heading-small text-muted mb-4">{{ __('Información de la especialidad') }}</h6>
@@ -60,9 +79,8 @@
 
                                 </div>
                                 <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="description">{{ __('Descripción') }}</label>          
-                                    <input type="text" name="description" id="description" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}"  value="{{ $especialidad->descripcion }}"  required>
-
+                                    <label class="form-control-label" for="description">{{ __('Descripción') }}</label>
+						            <textarea type="text" id="description" name="description" placeholder="Descripción" class="form-control" value="{{ $especialidad->descripcion }}" required>{{$especialidad->descripcion}}</textarea>
                                 </div>
 
                                 <div class="form-row">
